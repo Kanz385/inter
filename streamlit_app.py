@@ -1,6 +1,6 @@
 
- requirements.txt
-# https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py
+requirements.txt
+pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py")
 
 import streamlit as st
 import pandas as pd
