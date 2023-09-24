@@ -8,6 +8,7 @@ df_url = "https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py"
 # For now, I'm commenting it out
 df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
 
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -70,12 +71,15 @@ if __name__ == '__main__':
 ##### Features for the second visual
 
 #######
+
+
+#######
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
 
 # Load your data
-df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
+df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')  # Adjust the path to your CSV file
 
 # Streamlit app function
 def main():
@@ -90,21 +94,19 @@ def main():
 
     # Add a selectbox for highlighting a specific category
     highlight_category = st.sidebar.selectbox("Highlight Category (Optional)", ['None'] + df[x_column].unique().tolist())
-    
-    # Create the bar chart using Plotly Express
-    if highlight_category != 'None':
-        df['highlight'] = df[x_column].apply(lambda x: x == highlight_category)
-        fig = px.bar(df, x=x_column, y=y_column, color='highlight', title=f"{x_column} vs {y_column}")
-        fig.update_traces(marker=dict(line=dict(width=0)))
-    else:
-        fig = px.bar(df, x=x_column, y=y_column, title=f"{x_column} vs {y_column}")
-    
-    # Customize the layout (optional)
-    fig.update_xaxes(title_text=x_column)
-    fig.update_yaxes(title_text=y_column)
 
-    # Display the bar chart
+    # Filter the data based on the selected category to highlight
+    if highlight_category != 'None':
+        filtered_data = df[df[x_column] == highlight_category]
+    else:
+        filtered_data = df
+
+    # Create the bar chart using Plotly
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x=filtered_data[x_column], y=filtered_data[y_column], marker_color='blue'))
+    fig.update_layout(title=f"{x_column} vs {y_column}", xaxis_title=x_column, yaxis_title=y_column)
     st.plotly_chart(fig)
 
 if __name__ == '__main__':
     main()
+
