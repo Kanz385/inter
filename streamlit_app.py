@@ -7,7 +7,7 @@ import plotly.express as px
 df_url = "https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py"
 # For now, I'm commenting it out
 df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
-plotly==5.6.0
+plotly==5.6.0 
 
 import streamlit as st
 import pandas as pd
