@@ -1,5 +1,5 @@
 
-requirements.txt
+filename = "requirements.txt"
 pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py")
 
 import streamlit as st
