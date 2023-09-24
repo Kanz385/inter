@@ -1,10 +1,15 @@
 
-filename = "requirements.txt"
-pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py")
+
 
 import streamlit as st
 import pandas as pd
 import numpy as np
+
+filename = "requirements.txt"
+
+data = pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py")
+
+
 
 st.title('Uber pickups in NYC')
 
