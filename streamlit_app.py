@@ -8,14 +8,22 @@ df_url = "https://raw.githubusercontent.com/Kanz385/inter/main/streamlit_app.py"
 # For now, I'm commenting it out
 df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
 
-# Sample DataFrame for testing (please replace this with your actual data)
-df = pd.DataFrame({
-    'BMI': [25, 30, 35, 40],
-    'Weight (Kg)': [70, 80, 90, 100]
-})
+import streamlit as st
+import pandas as pd
+import numpy as np
+
+st.title('Uber pickups in NYC')
 
 
-def display_bmi_vs_weight():
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+# Load your data
+df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
+
+# Streamlit app function
+def main():
     st.title("Interactive BMI vs. Weight Visualization")
 
     # Sidebar for filtering data
@@ -42,11 +50,35 @@ def display_bmi_vs_weight():
         opacity=0.7,
         title='BMI vs. Weight',
     )
-    fig.update_layout(margin=dict(t=40))
+    
+    # Customize the layout (optional)
+    fig.update_xaxes(title_text='Weight (Kg)')
+    fig.update_yaxes(title_text='BMI')
+    fig.update_traces(marker=dict(size=5))
+    
+    # Display the Plotly figure using Streamlit
     st.plotly_chart(fig)
 
+if __name__ == '__main__':
+    main()
 
-def display_bar_chart():
+######
+
+# Load your data
+
+
+##### Features for the second visual
+
+#######
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+
+# Load your data
+df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
+
+# Streamlit app function
+def main():
     st.title("Interactive Bar Chart")
 
     # Sidebar for user input
@@ -58,26 +90,21 @@ def display_bar_chart():
 
     # Add a selectbox for highlighting a specific category
     highlight_category = st.sidebar.selectbox("Highlight Category (Optional)", ['None'] + df[x_column].unique().tolist())
-
+    
     # Create the bar chart using Plotly Express
     if highlight_category != 'None':
         df['highlight'] = df[x_column].apply(lambda x: x == highlight_category)
         fig = px.bar(df, x=x_column, y=y_column, color='highlight', title=f"{x_column} vs {y_column}")
+        fig.update_traces(marker=dict(line=dict(width=0)))
     else:
         fig = px.bar(df, x=x_column, y=y_column, title=f"{x_column} vs {y_column}")
-    fig.update_layout(margin=dict(t=40))
+    
+    # Customize the layout (optional)
+    fig.update_xaxes(title_text=x_column)
+    fig.update_yaxes(title_text=y_column)
+
+    # Display the bar chart
     st.plotly_chart(fig)
-
-
-def main():
-    # Select which visualization to display
-    app_mode = st.selectbox("Choose a Visualization:", ["BMI vs. Weight", "Interactive Bar Chart"])
-    if app_mode == "BMI vs. Weight":
-        display_bmi_vs_weight()
-    elif app_mode == "Interactive Bar Chart":
-        display_bar_chart()
-
 
 if __name__ == '__main__':
     main()
-
