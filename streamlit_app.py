@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -8,9 +9,9 @@ st.title('Uber pickups in NYC')
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import plotly.graph_objects as go
 # Load your data
-df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
+df = pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/PCOS_data.csv")
 
 # Streamlit app function
 def main():
