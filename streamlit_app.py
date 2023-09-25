@@ -14,7 +14,7 @@ st.title('Uber pickups in NYC')
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import plotly.graph_objects as go
 # Load your data
 df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')
 
