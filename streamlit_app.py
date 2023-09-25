@@ -1,7 +1,9 @@
 
-streamlit
-pandas
-numpy
+
+
+Streamlit
+Pandas
+Numpy
 Plotly
 
 
