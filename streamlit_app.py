@@ -63,20 +63,33 @@ if __name__ == '__main__':
 #######
 
 
-#######
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+import plotly.express as px
 
-# Corrected URL (assuming that the file extension should be .csv)
+# Load data from the provided URL
 df = pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/PCOS_data.csv")
 
 def main():
-    st.title("Interactive Bar Chart")
+    st.title("Interactive Visualizations")
 
     # Sidebar for user input
-    st.sidebar.header("Select Data for Bar Chart")
+    st.sidebar.header("Choose Visualization")
+    visualization = st.sidebar.radio("Select Visualization", ["Bar Chart", "Histogram"])
 
+    if visualization == "Bar Chart":
+        bar_chart()
+    elif visualization == "Histogram":
+        histogram()
+
+    # Button to toggle data
+    if st.button('Toggle Data'):
+        st.dataframe(df)
+
+def bar_chart():
+    st.subheader("Interactive Bar Chart")
+    
     x_column = st.sidebar.selectbox("X-Axis Data (Category)", df.columns)
     y_column = st.sidebar.selectbox("Y-Axis Data (Value)", df.columns)
     highlight_category = st.sidebar.selectbox("Highlight Category (Optional)", ['None'] + df[x_column].unique().tolist())
@@ -91,10 +104,16 @@ def main():
     fig.update_layout(title=f"{x_column} vs {y_column}", xaxis_title=x_column, yaxis_title=y_column)
     st.plotly_chart(fig)
 
+def histogram():
+    st.subheader("Interactive Histogram")
+    
+    column_to_plot = st.sidebar.selectbox("Choose column to visualize", df.columns)
+    grouping_column = st.sidebar.selectbox("Group by column (optional)", ["None"] + df.select_dtypes(include=['object', 'category']).columns.tolist())
+    
+    color_param = None if grouping_column == "None" else grouping_column
+    
+    fig = px.histogram(df, x=column_to_plot, color=color_param, title=f"Distribution of {column_to_plot}")
+    st.plotly_chart(fig)
+
 if __name__ == '__main__':
     main()
-
-
-
-
-
