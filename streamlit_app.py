@@ -69,7 +69,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Load your data
-df = pd.read_csv('/Users/kanzmroue/Desktop/MSBA 325 fz/PCOS_data.csv')  # Adjust the path to your CSV file
+df = pd.read_csv("https://raw.githubusercontent.com/Kanz385/inter/main/PCOS_data.cs")  # Adjust the path to your CSV file
 
 # Streamlit app function
 def main():
